@@ -11,7 +11,7 @@
               >
             </li>
             <li>
-              <NuxtLink to="/stores" class="text-white hover:text-primary-600"
+              <NuxtLink to="#" class="text-white hover:text-primary-600"
                 >Stores</NuxtLink
               >
             </li>
