@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-lg shadow-md p-4">
+  <div class="h-full bg-white rounded-lg shadow-md p-4 flex flex-col">
     <div class="mb-4">
       <input
         type="text"
@@ -8,18 +8,23 @@
         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
       />
     </div>
-    <div class="h-[calc(100vh-16rem)] overflow-y-auto">
+    <div class="flex-grow overflow-y-auto">
+      <!-- Spinner de chargement -->
       <div v-if="loading" class="flex justify-center items-center h-full">
         <div
           class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"
         ></div>
       </div>
+
+      <!-- Message si aucune donnée -->
       <div
         v-else-if="stores.length === 0"
         class="text-center text-gray-500 py-8"
       >
         No stores found
       </div>
+
+      <!-- Liste des magasins -->
       <div v-else class="space-y-4">
         <StoreCard
           v-for="store in filteredStores"

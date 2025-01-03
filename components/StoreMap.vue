@@ -1,14 +1,10 @@
 <template>
   <ClientOnly>
-    <div class="h-[calc(100vh-64px)] w-full">
-      <!-- Ajustez 64px selon votre header -->
+    <div class="h-full w-full">
       <div ref="mapContainer" class="w-full h-full"></div>
     </div>
-
     <template #fallback>
-      <div
-        class="h-[calc(100vh-64px)] w-full bg-gray-100 flex items-center justify-center"
-      >
+      <div class="h-full w-full bg-gray-100 flex items-center justify-center">
         Chargement de la carte...
       </div>
     </template>
@@ -118,6 +114,24 @@ const fetchStores = async () => {
   }
 };
 
+const centerMapOnStore = (store: { latitude: number; longitude: number }) => {
+  console.log("Centering map on store:", store);
+  if (!map) {
+    console.error("Map is not initialized.");
+    return;
+  }
+
+  if (!store.latitude || !store.longitude) {
+    console.error("Invalid store coordinates:", store);
+    return;
+  }
+
+  map.setView([store.latitude, store.longitude], DEFAULT_ZOOM);
+  console.log(
+    `Map centered on store at [${store.latitude}, ${store.longitude}]`
+  );
+};
+
 // Watcher pour mettre à jour les marqueurs sur changement de stores
 watch(
   stores,
@@ -146,6 +160,10 @@ onUnmounted(() => {
   }
   // Retirer le gestionnaire de redimensionnement
   window.removeEventListener("resize", handleResize);
+});
+
+defineExpose({
+  centerMapOnStore, // Expose cette méthode pour qu'elle puisse être appelée depuis le parent
 });
 </script>
 
