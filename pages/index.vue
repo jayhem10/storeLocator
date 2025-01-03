@@ -23,7 +23,6 @@ import StoreList from "~/components/StoreList.vue";
 import StoreMap from "~/components/StoreMap.vue";
 
 const handleClick = (store) => {
-  console.log("Store selected:", store);
   storeMapRef.value?.centerMapOnStore(store);
 };
 const storeMapRef = ref(null);

@@ -68,8 +68,6 @@ const initMap = async () => {
       maxZoom: 20,
     }
   ).addTo(map);
-
-  console.log("Map initialized, centered on New York.");
 };
 
 // Ajout des marqueurs
@@ -102,15 +100,11 @@ const addMarkers = async (storeData: any[]) => {
 
     markers.push(marker);
   });
-
-  console.log(`${markers.length} markers added to the map.`);
 };
 
-// Gestion du redimensionnement de la carte
 const handleResize = () => {
   if (map) {
     map.invalidateSize();
-    console.log("Map resized.");
   }
 };
 
@@ -119,14 +113,12 @@ const fetchStores = async () => {
   try {
     const response = await $fetch("/api/store");
     stores.value = response;
-    console.log("Stores fetched:", stores.value);
   } catch (error) {
     console.error("Error fetching stores:", error);
   }
 };
 
 const centerMapOnStore = (store: { latitude: number; longitude: number }) => {
-  console.log("Centering map on store:", store);
   if (!map) {
     console.error("Map is not initialized.");
     return;
@@ -138,12 +130,8 @@ const centerMapOnStore = (store: { latitude: number; longitude: number }) => {
   }
 
   map.setView([store.latitude, store.longitude], DEFAULT_ZOOM);
-  console.log(
-    `Map centered on store at [${store.latitude}, ${store.longitude}]`
-  );
 };
 
-// Watcher pour mettre à jour les marqueurs sur changement de stores
 watch(
   stores,
   async (newStores) => {
@@ -167,7 +155,6 @@ onUnmounted(() => {
   if (map) {
     map.remove();
     map = null;
-    console.log("Map destroyed.");
   }
   // Retirer le gestionnaire de redimensionnement
   window.removeEventListener("resize", handleResize);
