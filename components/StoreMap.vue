@@ -15,6 +15,17 @@
 import { ref, onMounted, onUnmounted, watch, nextTick } from "vue";
 import "leaflet/dist/leaflet.css";
 
+// Import Leaflet et configurez les icônes
+import { Icon } from "leaflet";
+
+// Fix Leaflet's default icon paths
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.mergeOptions({
+  iconRetinaUrl: "/leaflet/marker-icon-2x.png",
+  iconUrl: "/leaflet/marker-icon.png",
+  shadowUrl: "/leaflet/marker-shadow.png",
+});
+
 const mapContainer = ref<HTMLElement | null>(null);
 let map: any = null;
 const markers: any[] = [];
