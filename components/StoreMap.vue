@@ -15,7 +15,6 @@
 import { ref, onMounted, onUnmounted, watch, nextTick } from "vue";
 import "leaflet/dist/leaflet.css";
 
-// Import Leaflet et configurez les icônes
 import { Icon } from "leaflet";
 
 // Fix Leaflet's default icon paths

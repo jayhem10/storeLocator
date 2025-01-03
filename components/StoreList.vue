@@ -1,5 +1,6 @@
 <template>
   <div class="h-full bg-white rounded-lg shadow-md p-4 flex flex-col">
+    <!-- Input de recherche -->
     <div class="mb-4">
       <input
         type="text"
@@ -8,7 +9,9 @@
         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-transparent"
       />
     </div>
-    <div class="flex-grow overflow-y-auto">
+
+    <!-- Contenu avec défilement -->
+    <div class="flex-grow overflow-y-auto max-h-[calc(100vh-8rem)]">
       <!-- Spinner de chargement -->
       <div v-if="loading" class="flex justify-center items-center h-full">
         <div
